@@ -6,6 +6,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { StudentModule } from './student/student.module';
 import { UserModule } from './user/user.module';
 import { User } from './user/entities/user.entity';
+import { DetalleServicioModule } from './detalle_servicio/detalle_servicio.module';
+import { PeriodoModule } from './periodo/periodo.module';
+import { ServicioModule } from './servicio/servicio.module';
 
 @Module({
   imports: [
@@ -27,6 +30,9 @@ import { User } from './user/entities/user.entity';
       }),
     }),
     UserModule,
+    DetalleServicioModule,
+    PeriodoModule,
+    ServicioModule,
   ],
   controllers: [AppController],
   providers: [AppService],

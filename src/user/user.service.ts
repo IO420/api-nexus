@@ -1,4 +1,9 @@
-import { Injectable, Logger, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import {
+  Injectable,
+  Logger,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -10,29 +15,23 @@ export class UserService {
   constructor(
     @InjectRepository(User)
     private userRepository: Repository<User>,
-  ) { }
+  ) {}
 
-  async findOneByNameandPassword(data:CreateUserDto): Promise<User> {
-
-    const { usuario, password } = data
+  async findOneByNameandPassword(data: CreateUserDto): Promise<User> {
+    const { usuario, password } = data;
 
     const user = await this.userRepository.findOne({
-      where: { usuario,password }
-    })
+      where: { usuario, password },
+    });
 
     if (!user) {
-      throw new NotFoundException(
-        `El usuario ${usuario} no fue encontrado`,
-      );
+      throw new NotFoundException(`El usuario ${usuario} no fue encontrado`);
     }
 
     return user;
   }
 
   async Login(data: CreateUserDto) {
-
-    const user = await this.findOneByNameandPassword(data);
-    return user
+    return await this.findOneByNameandPassword(data);
   }
-
 }

@@ -1,21 +1,31 @@
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'alumno' })
 export class Student {
-
-  @PrimaryColumn({ name: 'id_cuenta', type: 'int', unsigned: true })
+  @PrimaryGeneratedColumn({ name: 'id_cuenta', type: 'int', unsigned: true })
   id_cuenta: number;
 
   @Column({ name: 'nombre', type: 'varchar', length: 300, nullable: false })
   nombre: string;
 
-  @Column({ name: 'fecha_nacimiento', type: 'varchar', length: 8, nullable: true })
+  @Column({
+    name: 'fecha_nacimiento',
+    type: 'varchar',
+    length: 8,
+    nullable: true,
+  })
   fecha_nacimiento: string | null;
 
   @Column({ name: 'correo', type: 'varchar', length: 100, nullable: true })
   correo: string | null;
 
-  @Column({ name: 'credito', type: 'decimal', precision: 10, scale: 2, default: 0.00 })
+  @Column({
+    name: 'credito',
+    type: 'decimal',
+    precision: 10,
+    scale: 2,
+    default: 0.0,
+  })
   credito: string;
 
   @Column({

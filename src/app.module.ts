@@ -6,11 +6,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { StudentModule } from './student/student.module';
 import { UserModule } from './user/user.module';
 import { User } from './user/entities/user.entity';
+import { Student } from './student/entities/student.entity';
+import { TicketModule } from './ticket/ticket.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      isGlobal: true, 
+      isGlobal: true,
       envFilePath: '.env',
     }),
     TypeOrmModule.forRootAsync({
@@ -22,11 +24,13 @@ import { User } from './user/entities/user.entity';
         username: configService.get<string>('DB_USER'),
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_NAME'),
-        entities: [User],
+        entities: [User, Student],
         synchronize: false,
       }),
     }),
     UserModule,
+    StudentModule,
+    TicketModule,
   ],
   controllers: [AppController],
   providers: [AppService],

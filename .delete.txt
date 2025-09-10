@@ -61,3 +61,29 @@ CREATE TABLE `detalle_servicio` (
   CONSTRAINT `fk_detalle_servicio_periodo1` FOREIGN KEY (`id_periodo`) REFERENCES `periodo` (`id_periodo`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=167097 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+
+DROP TABLE IF EXISTS `periodo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `periodo` (
+  `id_periodo` int(11) NOT NULL AUTO_INCREMENT,
+  `semestre` char(6) NOT NULL,
+  `fecha_inicio_servicio` date NOT NULL,
+  `fecha_fin_servicio` date NOT NULL,
+  `activo` bit(1) NOT NULL DEFAULT b'1' COMMENT 'cuando se cree un periodo nuevo todos los anteriores deben de quedar en 0, y el ultimo en 1.',
+  PRIMARY KEY (`id_periodo`)
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+DROP TABLE IF EXISTS `servicio`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `servicio` (
+  `id_servicio` int(11) NOT NULL AUTO_INCREMENT,
+  `servicio` varchar(45) NOT NULL,
+  PRIMARY KEY (`id_servicio`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--

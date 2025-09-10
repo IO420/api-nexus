@@ -12,45 +12,26 @@ export class UserService {
     private userRepository: Repository<User>,
   ) { }
 
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
-  }
+  async findOneByNameandPassword(data:CreateUserDto): Promise<User> {
 
-  findAll() {
-    return `This action returns all user`;
-  }
-
-  async findOneByName(nombre: string): Promise<User> {
+    const { usuario, password } = data
 
     const user = await this.userRepository.findOne({
-      where: { nombre }
+      where: { usuario,password }
     })
 
     if (!user) {
       throw new NotFoundException(
-        `El usuario ${nombre} no fue encontrado`,
+        `El usuario ${usuario} no fue encontrado`,
       );
     }
 
     return user;
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} user`;
-  }
-
   async Login(data: CreateUserDto) {
-    const { username } = data
 
-    if (!username) {
-      throw new UnauthorizedException('Credenciales inválidas.');
-    }
-
-    const user = await this.findOneByName(username)
+    const user = await this.findOneByNameandPassword(data);
     return user
   }
 

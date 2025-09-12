@@ -3,11 +3,15 @@ import { UserService } from './user.service';
 import { UserController } from './user.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
+import { PassportModule } from '@nestjs/passport';
+import { JwtStrategy } from './jwt.strategy';
 
 @Module({
   imports: [
+    TypeOrmModule.forFeature([User]),
+    PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.registerAsync({
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => {
@@ -19,11 +23,9 @@ import { JwtModule } from '@nestjs/jwt';
       },
 
     }),
-
-    TypeOrmModule.forFeature([User])
   ],
   controllers: [UserController],
-  providers: [UserService],
+  providers: [UserService,JwtStrategy],
   exports: [UserService],
 })
 export class UserModule { }

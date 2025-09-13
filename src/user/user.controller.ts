@@ -1,4 +1,5 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Request } from '@nestjs/common';
+import { Controller, Get, Post, Body, UseGuards, Request, Res } from '@nestjs/common';
+import type { Response } from 'express';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { AuthGuard } from '@nestjs/passport';
@@ -7,10 +8,11 @@ import { AuthGuard } from '@nestjs/passport';
 export class UserController {
   constructor(private readonly userService: UserService) { }
 
-  @Post()
-  Login(@Body() user: CreateUserDto) {
-    return this.userService.Login(user);
-  }
+@Post()
+async Login(@Body() data: CreateUserDto, @Res() res: Response) {
+  return this.userService.Login(data, res);
+}
+
 
   @UseGuards(AuthGuard('jwt'))
   @Get('/validate-token')
@@ -19,3 +21,4 @@ export class UserController {
   }
 
 }
+//IO

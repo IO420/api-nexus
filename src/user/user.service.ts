@@ -1,4 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { Response } from 'express';
 import { CreateUserDto } from './dto/create-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
@@ -24,20 +25,27 @@ export class UserService {
 
     if (!user) {
       throw new NotFoundException(
-        `El usuario ${usuario} no fue encontrado`,
+        `El usuario o la contraseña es incorrecta`,
       );
     }
 
     return user;
   }
 
-  async Login(data: CreateUserDto): Promise<{ access_token: string }> {
+  async Login(data: CreateUserDto, res: Response) {
     const user = await this.findOneByNameandPassword(data);
 
     const payload = { id: user.id_usuario, usuario: user.usuario };
-    return {
-      access_token: await this.jwtService.signAsync(payload),
-    };
+    const token = await this.jwtService.signAsync(payload);
+
+        res.cookie('token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production', // en dev desactívalo
+      sameSite: 'strict',
+      path: '/',
+    });
+
+    return res.json({ message: 'Inicio de sesión exitoso' });
   }
 
 }

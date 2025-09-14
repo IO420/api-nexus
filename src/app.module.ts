@@ -3,17 +3,18 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { StudentModule } from './student/student.module';
+import { StudentModule } from './alumno/student.module';
 import { UserModule } from './user/user.module';
 import { User } from './user/entities/user.entity';
 import { DetalleServicioModule } from './detalle_servicio/detalle_servicio.module';
 import { PeriodoModule } from './periodo/periodo.module';
 import { ServicioModule } from './servicio/servicio.module';
+import { Student } from './alumno/entities/student.entity';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      isGlobal: true, 
+      isGlobal: true,
       envFilePath: '.env',
     }),
     TypeOrmModule.forRootAsync({
@@ -25,7 +26,7 @@ import { ServicioModule } from './servicio/servicio.module';
         username: configService.get<string>('DB_USER'),
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_NAME'),
-        entities: [User],
+        entities: [User, Student],
         synchronize: false,
       }),
     }),
@@ -33,6 +34,7 @@ import { ServicioModule } from './servicio/servicio.module';
     DetalleServicioModule,
     PeriodoModule,
     ServicioModule,
+    StudentModule,
   ],
   controllers: [AppController],
   providers: [AppService],

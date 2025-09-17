@@ -1,5 +1,5 @@
-import { Type } from 'class-transformer';
-import { IsDate, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+
+import { IsEmail, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class CreateStudentDto {
   @IsNotEmpty()
@@ -17,6 +17,7 @@ export class CreateStudentDto {
   @IsNumber()
   id_carrera: number;
 
+  @IsEmail()
   @IsString()
   correo: string;
 }

@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateStudentDto } from './dto/create-student.dto';
 import { UpdateStudentDto } from './dto/update-student.dto';
 import { Student } from './entities/student.entity';
-import { Repository } from 'typeorm';
+import { EntityManager, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
@@ -32,11 +32,22 @@ export class StudentService {
     return student;
   }
 
-  update(id: number, updateStudentDto: UpdateStudentDto) {
-    return `This action updates a #${id} student`;
+  async GetCredit(id_cuenta: number): Promise<Student['credito']> {
+    const student = await this.findOne(id_cuenta);
+    return student.credito;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} student`;
+  async UpdateCredit(
+    id_cuenta: number,
+    credit: number,
+    manager: EntityManager,
+  ) {
+    const repo = manager.getRepository(Student);
+    return await repo
+      .createQueryBuilder()
+      .update()
+      .set({ credito: () => `credito - ${credit}` })
+      .where({ id_cuenta })
+      .execute();
   }
 }

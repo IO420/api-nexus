@@ -49,7 +49,6 @@ export class Perfil {
   @Column({ name: 'perfil', type: 'varchar', length: 45, nullable: false })
   perfil: string;
 
-  // Relación uno a muchos con usuario
   @OneToMany(() => User, (user) => user.perfil)
   usuarios: User[];
 }

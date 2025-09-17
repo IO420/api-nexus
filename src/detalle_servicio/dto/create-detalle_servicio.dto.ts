@@ -1,9 +1,15 @@
 import { Type } from 'class-transformer';
-import { IsDate, IsInt, IsNotEmpty, IsOptional, Min } from 'class-validator';
+import { IsDate, IsIn, IsInt, IsNotEmpty, IsOptional, Min } from 'class-validator';
 
 export class CreateDetalleServicioDto {
+
   @IsInt()
-  @Min(0)
+  @IsNotEmpty()
+  @Min(1)
+  monto:number
+
+  @IsInt()
+  @Min(1)
   @IsNotEmpty()
   numero_hojas: number;
 
@@ -23,8 +29,4 @@ export class CreateDetalleServicioDto {
   @IsInt()
   @IsNotEmpty()
   id_usuario: number;
-
-  @IsOptional()
-  @IsInt()
-  id_periodo?: number;
 }

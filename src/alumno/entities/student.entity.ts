@@ -26,7 +26,7 @@ export class Student {
     scale: 2,
     default: 0.0,
   })
-  credito: string;
+  credito: number;
 
   @Column({
     name: 'fecha_actualizacion_credito',

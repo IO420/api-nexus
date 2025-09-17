@@ -15,7 +15,7 @@ export class DetalleServicio {
     scale: 2,
     nullable: false,
   })
-  monto: string;
+  monto: number;
 
   @Column({ name: 'numero_hojas', type: 'int', nullable: false, default: 0 })
   numero_hojas: number;
@@ -40,12 +40,3 @@ export class DetalleServicio {
   @Column({ name: 'id_perido', type: 'int', default: null })
   id_periodo: number;
 }
-
-/*   `id_detalle_servicio` int(11) NOT NULL AUTO_INCREMENT,
-  `monto` decimal(10,2) NOT NULL,
-  `numero_hojas` int(11) NOT NULL DEFAULT 0,
-  `fecha_operacion` timestamp NOT NULL DEFAULT current_timestamp(),
-  `id_cuenta` int(9) unsigned zerofill NOT NULL,
-  `id_servicio` int(11) NOT NULL,
-  `id_usuario` int(11) NOT NULL,
-  `id_periodo` int(11) DEFAULT NULL,*/

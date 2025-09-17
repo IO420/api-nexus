@@ -7,6 +7,18 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
+@Entity({ name: 'perfil' })
+export class Perfil {
+  @PrimaryGeneratedColumn({ name: 'id_perfil', type: 'int' })
+  id_perfil: number;
+
+  @Column({ name: 'perfil', type: 'varchar', length: 45, nullable: false })
+  perfil: string;
+
+  @OneToMany(() => User, (user) => user.perfil)
+  usuarios: User[];
+}
+
 @Entity({ name: 'usuario' })
 export class User {
   @PrimaryGeneratedColumn({ name: 'id_usuario', type: 'int' })
@@ -39,16 +51,4 @@ export class User {
   @ManyToOne(() => Perfil, (perfil) => perfil.usuarios, { eager: true })
   @JoinColumn({ name: 'id_perfil' })
   perfil: Perfil;
-}
-
-@Entity({ name: 'perfil' })
-export class Perfil {
-  @PrimaryGeneratedColumn({ name: 'id_perfil', type: 'int' })
-  id_perfil: number;
-
-  @Column({ name: 'perfil', type: 'varchar', length: 45, nullable: false })
-  perfil: string;
-
-  @OneToMany(() => User, (user) => user.perfil)
-  usuarios: User[];
 }

@@ -5,7 +5,7 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { StudentModule } from './alumno/student.module';
 import { UserModule } from './user/user.module';
-import { User } from './user/entities/user.entity';
+import { Perfil, User } from './user/entities/user.entity';
 import { DetalleServicioModule } from './detalle_servicio/detalle_servicio.module';
 import { PeriodoModule } from './periodo/periodo.module';
 import { ServicioModule } from './servicio/servicio.module';
@@ -29,7 +29,7 @@ import { Servicio } from './servicio/entities/servicio.entity';
         username: configService.get<string>('DB_USER'),
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_NAME'),
-        entities: [User,Student,DetalleServicio,Periodo,Servicio],
+        entities: [User,Student,DetalleServicio,Periodo,Servicio,Perfil],
         synchronize: false,//Never change to true in production!
       }),
     }),

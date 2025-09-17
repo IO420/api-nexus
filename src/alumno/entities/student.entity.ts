@@ -14,7 +14,7 @@ export class Student {
     length: 8,
     nullable: true,
   })
-  fecha_nacimiento: string | null;
+  fecha_nacimiento: Date | null;
 
   @Column({ name: 'correo', type: 'varchar', length: 100, nullable: true })
   correo: string | null;
@@ -47,7 +47,11 @@ export class Student {
   @Column({ name: 'id_periodo', type: 'int', nullable: true })
   id_periodo: number | null;
 
-  @Column({ name: 'fecha_registro', type: 'datetime', nullable: false })
+  @Column({
+    name: 'fecha_registro',
+    type: 'datetime',
+    nullable: false,
+  })
   fecha_registro: Date;
 
   @Column({ name: 'id_carrera', type: 'int', nullable: false })

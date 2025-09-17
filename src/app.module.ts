@@ -17,7 +17,7 @@ import { Servicio } from './servicio/entities/servicio.entity';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      isGlobal: true, 
+      isGlobal: true,
       envFilePath: '.env',
     }),
     TypeOrmModule.forRootAsync({
@@ -38,6 +38,7 @@ import { Servicio } from './servicio/entities/servicio.entity';
     DetalleServicioModule,
     PeriodoModule,
     ServicioModule,
+    StudentModule,
   ],
   controllers: [AppController],
   providers: [AppService],

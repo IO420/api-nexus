@@ -6,7 +6,7 @@ import { EntityManager, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
-export class StudentService {
+export class AlumnoService {
   constructor(
     @InjectRepository(Student)
     private readonly studentRepository: Repository<Student>,

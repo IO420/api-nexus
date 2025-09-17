@@ -1,5 +1,5 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { StudentService } from 'src/alumno/student.service';
+import { AlumnoService } from 'src/alumno/student.service';
 import { DetalleServicioService } from 'src/detalle_servicio/detalle_servicio.service';
 import { DataSource } from 'typeorm';
 import { chargePrintDto } from './dto/operations.dto';
@@ -9,7 +9,7 @@ import { CreateDetalleServicioDto } from 'src/detalle_servicio/dto/create-detall
 export class OperationsService {
   constructor(
     private readonly dataSource: DataSource,
-    private readonly studentService: StudentService,
+    private readonly alumnoService: AlumnoService,
     private readonly detalleServicioService: DetalleServicioService,
   ) {}
 
@@ -21,7 +21,7 @@ export class OperationsService {
     await queryRunner.startTransaction();
 
     try {
-      const credit = await this.studentService.GetCredit(id_cuenta);
+      const credit = await this.alumnoService.GetCredit(id_cuenta);
 
       if (credit < monto) {
         throw new BadRequestException('Crédito insuficiente');
@@ -34,9 +34,12 @@ export class OperationsService {
         fecha_operacion: new Date(),
       };
 
-      await this.detalleServicioService.Create(detalleData, queryRunner.manager);
+      await this.detalleServicioService.Create(
+        detalleData,
+        queryRunner.manager,
+      );
 
-      await this.studentService.UpdateCredit(
+      await this.alumnoService.UpdateCredit(
         id_cuenta,
         monto,
         queryRunner.manager,

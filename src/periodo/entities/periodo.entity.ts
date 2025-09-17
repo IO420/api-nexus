@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { DetalleServicio } from 'src/detalle_servicio/entities/detalle_servicio.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'periodo' })
 export class Periodo {
@@ -20,4 +21,10 @@ export class Periodo {
     default: () => "b'1'",
   })
   activo: boolean;
+
+  @OneToMany(
+    () => DetalleServicio,
+    (id_detalle_servicio) => id_detalle_servicio.id_periodo,
+  )
+  detalles_servicio: DetalleServicio[];
 }

@@ -13,6 +13,9 @@ import { Student } from './alumno/entities/student.entity';
 import { DetalleServicio } from './detalle_servicio/entities/detalle_servicio.entity';
 import { Periodo } from './periodo/entities/periodo.entity';
 import { Servicio } from './servicio/entities/servicio.entity';
+import { SancionModule } from './sancion/sancion.module';
+import { AlumnoSancionModule } from './alumno_sancion/alumno_sancion.module';
+import { AlumnoSancion } from './alumno_sancion/entities/alumno_sancion.entity';
 
 @Module({
   imports: [
@@ -29,8 +32,16 @@ import { Servicio } from './servicio/entities/servicio.entity';
         username: configService.get<string>('DB_USER'),
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_NAME'),
-        entities: [User,Student,DetalleServicio,Periodo,Servicio,Perfil],
-        synchronize: false,//Never change to true in production!
+        entities: [
+          User,
+          Student,
+          DetalleServicio,
+          Periodo,
+          Servicio,
+          Perfil,
+          AlumnoSancion,
+        ],
+        synchronize: false, //Never change to true in production!
       }),
     }),
     UserModule,
@@ -39,6 +50,8 @@ import { Servicio } from './servicio/entities/servicio.entity';
     PeriodoModule,
     ServicioModule,
     StudentModule,
+    SancionModule,
+    AlumnoSancionModule,
   ],
   controllers: [AppController],
   providers: [AppService],

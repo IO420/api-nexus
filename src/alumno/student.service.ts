@@ -1,6 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateStudentDto } from './dto/create-student.dto';
-import { UpdateStudentDto } from './dto/update-student.dto';
 import { Student } from './entities/student.entity';
 import { EntityManager, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -26,7 +25,7 @@ export class StudentService {
       where: { id_cuenta },
     });
     if (!student) {
-      throw new NotFoundException(`Student with ID ${id_cuenta} not found`);
+      throw new NotFoundException(`Student not found`);
     }
     return student;
   }

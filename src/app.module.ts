@@ -9,13 +9,14 @@ import { Perfil, User } from './user/entities/user.entity';
 import { DetalleServicioModule } from './detalle_servicio/detalle_servicio.module';
 import { PeriodoModule } from './periodo/periodo.module';
 import { ServicioModule } from './servicio/servicio.module';
-import { Student } from './alumno/entities/student.entity';
+import { Alumno, Carrera } from './alumno/entities/student.entity';
 import { DetalleServicio } from './detalle_servicio/entities/detalle_servicio.entity';
 import { Periodo } from './periodo/entities/periodo.entity';
 import { Servicio } from './servicio/entities/servicio.entity';
 import { SancionModule } from './sancion/sancion.module';
 import { AlumnoSancionModule } from './alumno_sancion/alumno_sancion.module';
 import { AlumnoSancion } from './alumno_sancion/entities/alumno_sancion.entity';
+import { Sancion } from './sancion/entities/sancion.entity';
 
 @Module({
   imports: [
@@ -34,12 +35,14 @@ import { AlumnoSancion } from './alumno_sancion/entities/alumno_sancion.entity';
         database: configService.get<string>('DB_NAME'),
         entities: [
           User,
-          Student,
+          Alumno,
           DetalleServicio,
           Periodo,
           Servicio,
           Perfil,
           AlumnoSancion,
+          Sancion,
+          Carrera,
         ],
         synchronize: false, //Never change to true in production!
       }),

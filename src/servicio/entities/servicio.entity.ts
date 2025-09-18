@@ -8,6 +8,7 @@ export class Servicio {
 
   @Column({ type: 'varchar', length: 45, nullable: false })
   servicio: string;
+  
   @OneToMany(
     () => DetalleServicio,
     (id_detalle_servicio) => id_detalle_servicio.id_servicio,

@@ -1,4 +1,4 @@
-import { Student } from 'src/alumno/entities/student.entity';
+import { Alumno } from 'src/alumno/entities/student.entity';
 import { Periodo } from 'src/periodo/entities/periodo.entity';
 import { Servicio } from 'src/servicio/entities/servicio.entity';
 import { User } from 'src/user/entities/user.entity';
@@ -38,17 +38,24 @@ export class DetalleServicio {
   })
   fecha_operacion: Date;
 
-  @ManyToOne(() => Student, (id_cuenta) => id_cuenta.detalles_servicio, {
+  @Column()
+  id_cuenta:number
+
+    @Column()
+  id_servicio:number
+
+
+  @ManyToOne(() => Alumno, (id_cuenta) => id_cuenta.detalles_servicio, {
     eager: true,
   })
   @JoinColumn({ name: 'id_cuenta' })
-  id_cuenta: Student;
+  cuenta: Alumno;
 
   @ManyToOne(() => Servicio, (id_servicio) => id_servicio.detalles_servicio, {
     eager: true,
   })
   @JoinColumn({ name: 'id_servicio' })
-  id_servicio: Servicio;
+  servicio: Servicio;
 
   @ManyToOne(() => User, (id_perfil) => id_perfil.detalles_servicio, {
     eager: true,

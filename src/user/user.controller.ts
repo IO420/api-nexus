@@ -17,8 +17,8 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
-  async Login(@Body() data: CreateUserDto, @Res() res: Response) {
-    return this.userService.Login(data, res);
+  async Login(@Body() data: CreateUserDto) {
+    return this.userService.Login(data);
   }
 
   @UseGuards(AuthGuard('jwt'))

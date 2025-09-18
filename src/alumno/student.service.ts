@@ -1,27 +1,27 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateStudentDto } from './dto/create-student.dto';
-import { Student } from './entities/student.entity';
+import { Alumno } from './entities/student.entity';
 import { EntityManager, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class AlumnoService {
   constructor(
-    @InjectRepository(Student)
-    private readonly studentRepository: Repository<Student>,
+    @InjectRepository(Alumno)
+    private readonly studentRepository: Repository<Alumno>,
   ) {}
 
-  async create(createStudentDto: CreateStudentDto): Promise<Student> {
+  async create(createStudentDto: CreateStudentDto): Promise<Alumno> {
     //Hubo pedos con la base , revisar
     const student = this.studentRepository.create(createStudentDto);
     return await this.studentRepository.save(student);
   }
 
-  findAll(): Promise<Student[]> {
+  findAll(): Promise<Alumno[]> {
     return this.studentRepository.find({ skip: 5000, take: 50 });
   }
 
-  async findOne(id_cuenta: number): Promise<Student> {
+  async findOne(id_cuenta: number): Promise<Alumno> {
     const student = await this.studentRepository.findOne({
       where: { id_cuenta },
     });
@@ -31,7 +31,7 @@ export class AlumnoService {
     return student;
   }
 
-  async GetCredit(id_cuenta: number): Promise<Student['credito']> {
+  async GetCredit(id_cuenta: number): Promise<Alumno['credito']> {
     const student = await this.findOne(id_cuenta);
     return student.credito;
   }
@@ -41,7 +41,7 @@ export class AlumnoService {
     credit: number,
     manager: EntityManager,
   ) {
-    const repo = manager.getRepository(Student);
+    const repo = manager.getRepository(Alumno);
     return await repo
       .createQueryBuilder()
       .update()

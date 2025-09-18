@@ -1,4 +1,4 @@
-import { Student } from 'src/alumno/entities/student.entity';
+import { Alumno } from 'src/alumno/entities/student.entity';
 import { Sancion } from 'src/sancion/entities/sancion.entity';
 import {
   Column,
@@ -21,25 +21,17 @@ export class AlumnoSancion {
   })
   fecha_inicio: Date;
 
-  @ManyToOne(
-    () => Student,
-    (id_alumno_sancion) => id_alumno_sancion.id_cuentas,
-    {
-      eager: true,
-      nullable: true,
-    },
-  )
+  @ManyToOne(() => Alumno, (student) => student.sanciones, {
+    eager: true,
+    nullable: true,
+  })
   @JoinColumn({ name: 'id_cuenta' })
-  id_cuenta: Student;
+  id_cuenta: Alumno;
 
-  @ManyToOne(
-    () => Sancion,
-    (id_alumno_sancion) => id_alumno_sancion.id_sanciones,
-    {
-      eager: true,
-      nullable: true,
-    },
-  )
+  @ManyToOne(() => Sancion, (sancion) => sancion.sancion, {
+    eager: true,
+    nullable: true,
+  })
   @JoinColumn({ name: 'id_sancion' })
   id_sancion: Sancion;
 }

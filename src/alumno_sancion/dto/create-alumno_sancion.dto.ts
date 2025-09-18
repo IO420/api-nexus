@@ -8,8 +8,4 @@ export class CreateAlumnoSancionDto {
   @IsNotEmpty()
   @IsInt()
   id_cuenta: number;
-
-  @IsOptional()
-  @IsDateString()
-  fecha_inicio?: string;
 }

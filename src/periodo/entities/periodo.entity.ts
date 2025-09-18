@@ -1,0 +1,23 @@
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+
+@Entity({ name: 'periodo' })
+export class Periodo {
+  @PrimaryGeneratedColumn({ name: 'id_periodo', type: 'int' })
+  id_periodo: number;
+
+  @Column({ type: 'char', length: 6, nullable: false })
+  semestre: string;
+
+  @Column({ name: 'fecha_inicio_servicio', type: 'date', nullable: false })
+  fecha_inicio_servicio: Date;
+
+  @Column({ name: 'fecha_fin_servicio', type: 'date', nullable: false })
+  fecha_fin_servicio: Date;
+
+  @Column({
+    type: 'bit',
+    width: 1,
+    default: () => "b'1'",
+  })
+  activo: boolean;
+}

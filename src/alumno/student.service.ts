@@ -5,13 +5,14 @@ import { EntityManager, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
-export class StudentService {
+export class AlumnoService {
   constructor(
     @InjectRepository(Student)
     private readonly studentRepository: Repository<Student>,
   ) {}
 
   async create(createStudentDto: CreateStudentDto): Promise<Student> {
+    //Hubo pedos con la base , revisar
     const student = this.studentRepository.create(createStudentDto);
     return await this.studentRepository.save(student);
   }

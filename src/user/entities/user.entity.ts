@@ -1,3 +1,4 @@
+import { DetalleServicio } from 'src/detalle_servicio/entities/detalle_servicio.entity';
 import {
   Column,
   Entity,
@@ -51,4 +52,10 @@ export class User {
   @ManyToOne(() => Perfil, (perfil) => perfil.usuarios, { eager: true })
   @JoinColumn({ name: 'id_perfil' })
   perfil: Perfil;
+
+  @OneToMany(
+    () => DetalleServicio,
+    (id_detalle_servicio) => id_detalle_servicio.id_perfil,
+  )
+  detalles_servicio: DetalleServicio[];
 }

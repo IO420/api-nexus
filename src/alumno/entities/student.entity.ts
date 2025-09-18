@@ -1,4 +1,30 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { AlumnoSancion } from 'src/alumno_sancion/entities/alumno_sancion.entity';
+import { DetalleServicio } from 'src/detalle_servicio/entities/detalle_servicio.entity';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+
+@Entity({ name: 'carrea' })
+export class Carrera {
+  @PrimaryGeneratedColumn({ name: 'id_carrera', type: 'int', unsigned: true })
+  id_carrera: number;
+
+  @Column({
+    name: 'nombre_carrea',
+    type: 'varchar',
+    length: 100,
+    nullable: false,
+  })
+  nombre_carrea: string;
+
+  @OneToMany(() => Student, (id_carrera) => id_carrera.id_cuenta)
+  id_carreras: Student[];
+}
 
 @Entity({ name: 'alumno' })
 export class Student {
@@ -54,9 +80,22 @@ export class Student {
   })
   fecha_registro: Date;
 
-  @Column({ name: 'id_carrera', type: 'int', nullable: false })
-  id_carrera: number;
-
   @Column({ name: 'generacion', type: 'int', width: 4, nullable: true })
   generacion: number | null;
+
+  @OneToMany(
+    () => DetalleServicio,
+    (id_detalle_servicio) => id_detalle_servicio.id_cuenta,
+  )
+  detalles_servicio: DetalleServicio[];
+
+  @ManyToOne(() => Carrera, (id_cuenta) => id_cuenta.id_carreras, {
+    eager: true,
+    nullable: true,
+  })
+  @JoinColumn({ name: 'id_carrera' })
+  id_periodos: Carrera;
+
+  @OneToMany(() => AlumnoSancion, (id_cuenta) => id_cuenta.id_alumno_sancion)
+  id_cuentas: AlumnoSancion[];
 }

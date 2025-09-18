@@ -1,4 +1,14 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Student } from 'src/alumno/entities/student.entity';
+import { Periodo } from 'src/periodo/entities/periodo.entity';
+import { Servicio } from 'src/servicio/entities/servicio.entity';
+import { User } from 'src/user/entities/user.entity';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity({ name: 'detalle_servicio' })
 export class DetalleServicio {
@@ -28,15 +38,28 @@ export class DetalleServicio {
   })
   fecha_operacion: Date;
 
-  @Column({ name: 'id_cuenta', type: 'int', nullable: false })
-  id_cuenta: number;
+  @ManyToOne(() => Student, (id_cuenta) => id_cuenta.detalles_servicio, {
+    eager: true,
+  })
+  @JoinColumn({ name: 'id_cuenta' })
+  id_cuenta: Student;
 
-  @Column({ name: 'id_servicio', type: 'int', nullable: false })
-  id_servicio: number;
+  @ManyToOne(() => Servicio, (id_servicio) => id_servicio.detalles_servicio, {
+    eager: true,
+  })
+  @JoinColumn({ name: 'id_servicio' })
+  id_servicio: Servicio;
 
-  @Column({ name: 'id_usuario', type: 'int', nullable: false })
-  id_usuario: number;
+  @ManyToOne(() => User, (id_perfil) => id_perfil.detalles_servicio, {
+    eager: true,
+  })
+  @JoinColumn({ name: 'id_usuario' })
+  id_perfil: User;
 
-  @Column({ name: 'id_perido', type: 'int', default: null })
-  id_periodo: number;
+  @ManyToOne(() => Periodo, (id_periodo) => id_periodo.detalles_servicio, {
+    eager: true,
+    nullable: true,
+  })
+  @JoinColumn({ name: 'id_periodo' })
+  id_periodo: Periodo;
 }

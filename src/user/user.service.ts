@@ -10,42 +10,25 @@ import { JwtService } from '@nestjs/jwt';
 export class UserService {
   constructor(
     @InjectRepository(User)
-    private readonly userRepository: Repository<User>,
-
-    private jwtService: JwtService
-  ) { }
+    private userRepository: Repository<User>,
+  ) {}
 
   async findOneByNameandPassword(data: CreateUserDto): Promise<User> {
-
-    const { usuario, password } = data
+    const { usuario, password } = data;
 
     const user = await this.userRepository.findOne({
-      where: { usuario, password }
-    })
+      where: { usuario, password },
+    });
 
     if (!user) {
-      throw new NotFoundException(
-        `El usuario o la contraseña es incorrecta`,
-      );
+      throw new NotFoundException(`El usuario ${usuario} no fue encontrado`);
     }
 
     return user;
   }
 
-  async Login(data: CreateUserDto, res: Response) {
+  async Login(data: CreateUserDto) {
     const user = await this.findOneByNameandPassword(data);
-
-    const payload = { id: user.id_usuario, usuario: user.usuario };
-    const token = await this.jwtService.signAsync(payload);
-
-        res.cookie('token', token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production', // en dev desactívalo
-      sameSite: 'strict',
-      path: '/',
-    });
-
-    return res.json({ message: 'Inicio de sesión exitoso' });
+    return user;
   }
-
 }

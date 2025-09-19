@@ -1,5 +1,6 @@
 import { AlumnoSancion } from 'src/alumno_sancion/entities/alumno_sancion.entity';
 import { DetalleServicio } from 'src/detalle_servicio/entities/detalle_servicio.entity';
+import { Recibo } from 'src/recibo/entities/recibo.entity';
 import {
   Column,
   Entity,
@@ -95,4 +96,7 @@ export class Alumno {
 
   @OneToMany(() => AlumnoSancion, (alusancion) => alusancion.sancion)
   sanciones: AlumnoSancion[];
+
+  @OneToMany(() => Recibo, (recibo) => recibo.alum)
+  recibo: Recibo[];
 }

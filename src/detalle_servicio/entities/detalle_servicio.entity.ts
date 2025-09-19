@@ -44,7 +44,6 @@ export class DetalleServicio {
     @Column()
   id_servicio:number
 
-
   @ManyToOne(() => Alumno, (id_cuenta) => id_cuenta.detalles_servicio, {
     eager: true,
   })

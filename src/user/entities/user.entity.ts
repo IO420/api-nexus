@@ -1,4 +1,5 @@
 import { DetalleServicio } from 'src/detalle_servicio/entities/detalle_servicio.entity';
+import { Recibo } from 'src/recibo/entities/recibo.entity';
 import {
   Column,
   Entity,
@@ -58,4 +59,7 @@ export class User {
     (id_detalle_servicio) => id_detalle_servicio.id_perfil,
   )
   detalles_servicio: DetalleServicio[];
+
+  @OneToMany(() => Recibo, (recibo) => recibo.user)
+  recibo: Recibo[];
 }

@@ -4,23 +4,4 @@ import { UpdatePeriodoDto } from './dto/update-periodo.dto';
 
 @Injectable()
 export class PeriodoService {
-  create(createPeriodoDto: CreatePeriodoDto) {
-    return 'This action adds a new periodo';
-  }
-
-  findAll() {
-    return `This action returns all periodo`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} periodo`;
-  }
-
-  update(id: number, updatePeriodoDto: UpdatePeriodoDto) {
-    return `This action updates a #${id} periodo`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} periodo`;
-  }
 }

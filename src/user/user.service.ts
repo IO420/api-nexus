@@ -41,7 +41,20 @@ export class UserService {
       path: '/',
     });
 
-    return res.json({ message: 'Inicio de sesión exitoso' });
+    return res.json({
+      message: 'Inicio de sesión exitoso',
+      access_token: token,
+    });
+  }
+
+  async findOne(id_usuario: number): Promise<User> {
+    const student = await this.userRepository.findOne({
+      where: { id_usuario },
+    });
+    if (!student) {
+      throw new NotFoundException(`Student not found`);
+    }
+    return student;
   }
 }
 //IO

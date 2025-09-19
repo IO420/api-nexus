@@ -4,7 +4,7 @@ import { CreateStudentDto } from './dto/create-student.dto';
 import { Alumno } from './entities/student.entity';
 
 @Controller('student')
-export class StudentController {
+export class AlumnoController {
   constructor(private readonly alumnoService: AlumnoService) {}
 
   @Post()
@@ -22,3 +22,4 @@ export class StudentController {
     return this.alumnoService.findOne(+id);
   }
 }
+//IO

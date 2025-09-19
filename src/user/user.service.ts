@@ -11,6 +11,7 @@ export class UserService {
   constructor(
     @InjectRepository(User)
     private userRepository: Repository<User>,
+    private jwtService: JwtService,
   ) {}
 
   async findOneByNameandPassword(data: CreateUserDto): Promise<User> {
@@ -21,14 +22,26 @@ export class UserService {
     });
 
     if (!user) {
-      throw new NotFoundException(`El usuario ${usuario} no fue encontrado`);
+      throw new NotFoundException(`El usuario o la contraseña es incorrecta`);
     }
 
     return user;
   }
 
-  async Login(data: CreateUserDto) {
+  async Login(data: CreateUserDto, res: Response) {
     const user = await this.findOneByNameandPassword(data);
-    return user;
+
+    const payload = { id: user.id_usuario, usuario: user.usuario };
+    const token = await this.jwtService.signAsync(payload);
+
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production', // en dev desactívalo
+      sameSite: 'strict',
+      path: '/',
+    });
+
+    return res.json({ message: 'Inicio de sesión exitoso' });
   }
 }
+//IO

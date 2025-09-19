@@ -7,9 +7,10 @@ import { OperationsService } from './operations.services';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Alumno, DetalleServicio]), // entidades que usarán las transacciones
+    TypeOrmModule.forFeature([Alumno, DetalleServicio]),
   ],
   controllers: [OperationsController],
   providers: [OperationsService],
 })
 export class OperationsModule {}
+//IO

@@ -93,6 +93,6 @@ export class Alumno {
   @JoinColumn({ name: 'id_carrera' })
   carrera: Carrera;
 
-  @OneToMany(() => AlumnoSancion, (alusancion) => alusancion.id_cuenta)
+  @OneToMany(() => AlumnoSancion, (alusancion) => alusancion.sancion)
   sanciones: AlumnoSancion[];
 }

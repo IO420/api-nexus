@@ -14,7 +14,7 @@ export class Sancion {
 
   @OneToMany(
     () => AlumnoSancion,
-    (alusancion) => alusancion.id_sancion,
+    (alusancion) => alusancion.sancion,
   )
   alumnosSancionados: AlumnoSancion[];
 }

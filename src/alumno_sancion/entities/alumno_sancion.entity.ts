@@ -23,15 +23,15 @@ export class AlumnoSancion {
 
   @ManyToOne(() => Alumno, (student) => student.sanciones, {
     eager: true,
-    nullable: true,
+    nullable: false,
   })
   @JoinColumn({ name: 'id_cuenta' })
-  id_cuenta: Alumno;
+  alumno: Alumno;
 
   @ManyToOne(() => Sancion, (sancion) => sancion.sancion, {
     eager: true,
-    nullable: true,
+    nullable: false,
   })
   @JoinColumn({ name: 'id_sancion' })
-  id_sancion: Sancion;
+  sancion: Sancion;
 }

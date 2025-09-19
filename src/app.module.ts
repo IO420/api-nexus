@@ -3,7 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { StudentModule } from './alumno/student.module';
+import { AlumnoModule } from './alumno/student.module';
 import { UserModule } from './user/user.module';
 import { Perfil, User } from './user/entities/user.entity';
 import { DetalleServicioModule } from './detalle_servicio/detalle_servicio.module';
@@ -48,11 +48,10 @@ import { Sancion } from './sancion/entities/sancion.entity';
       }),
     }),
     UserModule,
-    StudentModule,
+    AlumnoModule,
     DetalleServicioModule,
     PeriodoModule,
     ServicioModule,
-    StudentModule,
     SancionModule,
     AlumnoSancionModule,
   ],
@@ -60,3 +59,4 @@ import { Sancion } from './sancion/entities/sancion.entity';
   providers: [AppService],
 })
 export class AppModule {}
+//IO

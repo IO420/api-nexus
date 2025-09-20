@@ -56,7 +56,7 @@ export class User {
 
   @OneToMany(
     () => DetalleServicio,
-    (id_detalle_servicio) => id_detalle_servicio.id_perfil,
+    (id_detalle_servicio) => id_detalle_servicio.user,
   )
   detalles_servicio: DetalleServicio[];
 

@@ -24,7 +24,7 @@ export class Periodo {
 
   @OneToMany(
     () => DetalleServicio,
-    (id_detalle_servicio) => id_detalle_servicio.id_periodo,
+    (id_detalle_servicio) => id_detalle_servicio.periodo,
   )
   detalles_servicio: DetalleServicio[];
 }

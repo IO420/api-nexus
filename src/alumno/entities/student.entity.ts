@@ -84,7 +84,7 @@ export class Alumno {
   @Column({ name: 'generacion', type: 'int', width: 4, nullable: true })
   generacion: number | null;
 
-  @OneToMany(() => DetalleServicio, (detalle) => detalle.id_cuenta)
+  @OneToMany(() => DetalleServicio, (detalle) => detalle.alum)
   detalles_servicio: DetalleServicio[];
 
   @ManyToOne(() => Carrera, (carrera) => carrera.estudiantes, {

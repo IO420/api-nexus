@@ -6,12 +6,16 @@ import { OperationsController } from './operations.controller';
 import { OperationsService } from './operations.services';
 import { DetalleServicioModule } from 'src/detalle_servicio/detalle_servicio.module';
 import { AlumnoModule } from 'src/alumno/student.module';
+import { UserModule } from 'src/user/user.module';
+import { ReciboModule } from 'src/recibo/recibo.module';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([Alumno, DetalleServicio]),
     DetalleServicioModule,
     AlumnoModule,
+    UserModule,
+    ReciboModule,
   ],
   controllers: [OperationsController],
   providers: [OperationsService],

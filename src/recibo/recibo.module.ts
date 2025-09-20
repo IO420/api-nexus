@@ -10,6 +10,7 @@ import { UserModule } from 'src/user/user.module';
   imports: [TypeOrmModule.forFeature([Recibo]), AlumnoModule, UserModule],
   controllers: [ReciboController],
   providers: [ReciboService],
+  exports:[ReciboService]
 })
 export class ReciboModule {}
 //IO

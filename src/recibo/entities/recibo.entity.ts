@@ -1,4 +1,3 @@
-export class Ticket {}
 import {
   Column,
   Entity,
@@ -7,6 +6,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { User } from '../../user/entities/user.entity';
+import { Alumno } from 'src/alumno/entities/student.entity';
 
 @Entity({ name: 'recibo' })
 export class Recibo {
@@ -29,20 +29,11 @@ export class Recibo {
   monto: number;
 
   @Column({ name: 'fecha_recibo', type: 'date', nullable: false })
-  fecha_recibo: Date | null;
+  fecha_recibo: Date ;
 
-  @Column({
-    name: 'id_cuenta',
-    type: 'int',
-  })
-  id_cuenta: number;
-
-  @Column({
-    name: 'id_usuario',
-    type: 'int',
-    nullable: false,
-  })
-  id_usuario: number;
+  @ManyToOne(() => Alumno, (alum) => alum.id_cuenta, {})
+  @JoinColumn({ name: 'id_cuenta' })
+  alum: Alumno;
 
   @ManyToOne(() => User, (user) => user.id_usuario, {})
   @JoinColumn({ name: 'id_usuario' })

@@ -17,6 +17,9 @@ import { SancionModule } from './sancion/sancion.module';
 import { AlumnoSancionModule } from './alumno_sancion/alumno_sancion.module';
 import { AlumnoSancion } from './alumno_sancion/entities/alumno_sancion.entity';
 import { Sancion } from './sancion/entities/sancion.entity';
+import { OperationsModule } from './Operations/operations.module';
+import { Recibo } from './recibo/entities/recibo.entity';
+import { ReciboModule } from './recibo/recibo.module';
 
 @Module({
   imports: [
@@ -43,6 +46,7 @@ import { Sancion } from './sancion/entities/sancion.entity';
           AlumnoSancion,
           Sancion,
           Carrera,
+          Recibo,
         ],
         synchronize: false, //Never change to true in production!
       }),
@@ -54,6 +58,8 @@ import { Sancion } from './sancion/entities/sancion.entity';
     ServicioModule,
     SancionModule,
     AlumnoSancionModule,
+    OperationsModule,
+    ReciboModule,
   ],
   controllers: [AppController],
   providers: [AppService],

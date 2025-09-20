@@ -21,11 +21,10 @@ import { JwtStrategy } from './jwt.strategy';
           signOptions: { expiresIn: '1h' },
         };
       },
-
     }),
   ],
   controllers: [UserController],
-  providers: [UserService,JwtStrategy],
-  exports: [UserService],
+  providers: [UserService, JwtStrategy],
+  exports: [UserService,PassportModule,JwtModule],
 })
-export class UserModule { }
+export class UserModule {}

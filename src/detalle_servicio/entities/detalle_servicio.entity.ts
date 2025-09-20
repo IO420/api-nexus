@@ -38,18 +38,11 @@ export class DetalleServicio {
   })
   fecha_operacion: Date;
 
-  @Column()
-  id_cuenta:number
-
-    @Column()
-  id_servicio:number
-
-
-  @ManyToOne(() => Alumno, (id_cuenta) => id_cuenta.detalles_servicio, {
+  @ManyToOne(() => Alumno, (alum) => alum.detalles_servicio, {
     eager: true,
   })
   @JoinColumn({ name: 'id_cuenta' })
-  cuenta: Alumno;
+  alum: Alumno;
 
   @ManyToOne(() => Servicio, (id_servicio) => id_servicio.detalles_servicio, {
     eager: true,
@@ -57,16 +50,16 @@ export class DetalleServicio {
   @JoinColumn({ name: 'id_servicio' })
   servicio: Servicio;
 
-  @ManyToOne(() => User, (id_perfil) => id_perfil.detalles_servicio, {
+  @ManyToOne(() => User, (user) => user.detalles_servicio, {
     eager: true,
   })
   @JoinColumn({ name: 'id_usuario' })
-  id_perfil: User;
+  user: User;
 
-  @ManyToOne(() => Periodo, (id_periodo) => id_periodo.detalles_servicio, {
+  @ManyToOne(() => Periodo, (periodo) => periodo.detalles_servicio, {
     eager: true,
     nullable: true,
   })
   @JoinColumn({ name: 'id_periodo' })
-  id_periodo: Periodo;
+  periodo: Periodo;
 }

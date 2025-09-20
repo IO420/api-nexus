@@ -36,7 +36,7 @@ export class AlumnoService {
     return student.credito;
   }
 
-  async UpdateCredit(
+  async collectCredit(
     id_cuenta: number,
     credit: number,
     manager: EntityManager,
@@ -46,6 +46,20 @@ export class AlumnoService {
       .createQueryBuilder()
       .update()
       .set({ credito: () => `credito - ${credit}` })
+      .where({ id_cuenta })
+      .execute();
+  }
+
+    async addCredit(
+    id_cuenta: number,
+    credit: number,
+    manager: EntityManager,
+  ) {
+    const repo = manager.getRepository(Alumno);
+    return await repo
+      .createQueryBuilder()
+      .update()
+      .set({ credito: () => `credito + ${credit}` })
       .where({ id_cuenta })
       .execute();
   }

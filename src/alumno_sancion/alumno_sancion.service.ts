@@ -11,7 +11,6 @@ export class AlumnoSancionService {
   constructor(
     @InjectRepository(AlumnoSancion)
     private readonly alumnosancionRepository: Repository<AlumnoSancion>,
-
     private readonly alumnoService: AlumnoService,
     private readonly sancionService: SancionService,
   ) {}

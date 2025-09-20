@@ -11,7 +11,7 @@ export class Servicio {
   
   @OneToMany(
     () => DetalleServicio,
-    (id_detalle_servicio) => id_detalle_servicio.id_servicio,
+    (id_detalle_servicio) => id_detalle_servicio.servicio,
   )
   detalles_servicio: DetalleServicio[];
 }

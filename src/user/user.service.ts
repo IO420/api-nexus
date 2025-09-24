@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Response } from 'express';
-import { CreateUserDto } from './dto/create-user.dto';
+import { changePasswordDto, CreateUserDto } from './dto/create-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
@@ -12,7 +12,7 @@ export class UserService {
     @InjectRepository(User)
     private userRepository: Repository<User>,
     private jwtService: JwtService,
-  ) {}
+  ) { }
 
   async findOneByNameandPassword(data: CreateUserDto): Promise<User> {
     const { usuario, password } = data;
@@ -55,6 +55,17 @@ export class UserService {
       throw new NotFoundException(`Student not found`);
     }
     return student;
+  }
+
+  async changePassword(data: changePasswordDto, id_usuario: number) {
+
+    const user = await this.findOneByNameandPassword({
+      usuario: (await this.findOne(id_usuario)).usuario,
+      password: data.password,
+    });
+
+    user.password = data.newPassword;
+    return this.userRepository.save(user);
   }
 }
 //IO

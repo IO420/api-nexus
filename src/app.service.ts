@@ -14,10 +14,7 @@ export class AppService {
         propiedad intelectual.
       </p>
       <h4>
-        Encargado de la parte de programacion Lino 
-      </h4>
-      <h4>
-        Programadores: Carlos, Axel 
+        Programadores:Lino Carlos, Axel 
       </h4>
     `;
   }

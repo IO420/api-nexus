@@ -22,6 +22,8 @@ import { Recibo } from './recibo/entities/recibo.entity';
 import { ReciboModule } from './recibo/recibo.module';
 import { MesaModule } from './mesa/mesa.module';
 import { Mesa } from './mesa/entities/mesa.entity';
+import { AlumnoInscritoModule } from './alumno_inscrito/alumno_inscrito.module';
+import { AlumnoInscrito, Plataforma } from './alumno_inscrito/entities/alumno_inscrito.entity';
 
 @Module({
   imports: [
@@ -50,6 +52,8 @@ import { Mesa } from './mesa/entities/mesa.entity';
           Carrera,
           Recibo,
           Mesa,
+          AlumnoInscrito,
+          Plataforma,
         ],
         synchronize: false, //Never change to true in production!
       }),
@@ -64,6 +68,7 @@ import { Mesa } from './mesa/entities/mesa.entity';
     OperationsModule,
     ReciboModule,
     MesaModule,
+    AlumnoInscritoModule,
   ],
   controllers: [AppController],
   providers: [AppService],

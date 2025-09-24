@@ -84,15 +84,15 @@ export class Alumno {
   @Column({ name: 'generacion', type: 'int', width: 4, nullable: true })
   generacion: number | null;
 
-  @OneToMany(() => DetalleServicio, (detalle) => detalle.alum)
-  detalles_servicio: DetalleServicio[];
-
   @ManyToOne(() => Carrera, (carrera) => carrera.estudiantes, {
     eager: true,
     nullable: true,
   })
   @JoinColumn({ name: 'id_carrera' })
   carrera: Carrera;
+
+  @OneToMany(() => DetalleServicio, (detalle) => detalle.alum)
+  detalles_servicio: DetalleServicio[];
 
   @OneToMany(() => AlumnoSancion, (alusancion) => alusancion.sancion)
   sanciones: AlumnoSancion[];

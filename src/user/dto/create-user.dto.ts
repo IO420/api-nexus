@@ -55,3 +55,11 @@ export class CreateUserDto {
   @IsNotEmpty()
   id_perfil: number;
 }
+
+export class changePasswordDto {
+  @IsString()
+  password: string;
+
+  @IsString()
+  newPassword: string;
+}

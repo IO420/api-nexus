@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateStudentDto } from './dto/create-student.dto';
-import { Alumno } from './entities/student.entity';
+import { Alumno, Carrera } from './entities/student.entity';
 import { EntityManager, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 
@@ -9,17 +9,28 @@ export class AlumnoService {
   constructor(
     @InjectRepository(Alumno)
     private readonly studentRepository: Repository<Alumno>,
+    @InjectRepository(Carrera)
+    private readonly carreraRepository: Repository<Carrera>,
   ) {}
 
-  async create(createStudentDto: CreateStudentDto): Promise<Alumno> {
-    //Hubo pedos con la base , revisar
-    const student = this.studentRepository.create(createStudentDto);
+  async create(data: CreateStudentDto): Promise<Alumno> {
+    const { id_carrera, ...rest } = data;
+    const carrera = await this.carreraRepository.findOne({
+      where: { id_carrera: data.id_carrera },
+    });
+    if (!carrera) {
+      throw new NotFoundException(`Carrera not found`);
+    }
+    const createStudent = { ...rest, carrera, fecha_registro: new Date() };
+
+    const student = this.studentRepository.create(createStudent);
     return await this.studentRepository.save(student);
   }
 
   async findOne(id_cuenta: number): Promise<Alumno> {
     const student = await this.studentRepository.findOne({
-      where: { id_cuenta: id_cuenta },
+      where: { id_cuenta },
+      select: { id_cuenta: true, nombre: true, credito: true },
     });
 
     if (!student) {

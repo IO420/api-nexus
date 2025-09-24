@@ -21,5 +21,3 @@ export class CreateStudentDto {
   @IsString()
   correo: string;
 }
-
-//Hubo pedos con la base , revisar

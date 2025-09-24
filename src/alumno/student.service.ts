@@ -17,17 +17,15 @@ export class AlumnoService {
     return await this.studentRepository.save(student);
   }
 
-  findAll(): Promise<Alumno[]> {
-    return this.studentRepository.find({ skip: 5000, take: 50 });
-  }
-
   async findOne(id_cuenta: number): Promise<Alumno> {
     const student = await this.studentRepository.findOne({
-      where: { id_cuenta },
+      where: { id_cuenta: id_cuenta },
     });
+
     if (!student) {
       throw new NotFoundException(`Student not found`);
     }
+
     return student;
   }
 
@@ -50,11 +48,7 @@ export class AlumnoService {
       .execute();
   }
 
-    async addCredit(
-    id_cuenta: number,
-    credit: number,
-    manager: EntityManager,
-  ) {
+  async addCredit(id_cuenta: number, credit: number, manager: EntityManager) {
     const repo = manager.getRepository(Alumno);
     return await repo
       .createQueryBuilder()

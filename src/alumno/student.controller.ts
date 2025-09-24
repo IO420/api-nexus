@@ -12,11 +12,6 @@ export class AlumnoController {
     return this.alumnoService.create(createStudentDto);
   }
 
-  @Get()
-  async findAll(): Promise<Alumno[]> {
-    return this.alumnoService.findAll();
-  }
-
   @Get(':id')
   findOne(@Param('id') id: number) {
     return this.alumnoService.findOne(+id);

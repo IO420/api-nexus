@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Response } from 'express';
-import { CreateUserDto } from './dto/create-user.dto';
+import { CreateUserDto, Login } from './dto/create-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from './entities/user.entity';
+import { Perfil, User } from './entities/user.entity';
 import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
 
@@ -11,10 +11,13 @@ export class UserService {
   constructor(
     @InjectRepository(User)
     private userRepository: Repository<User>,
+
+    @InjectRepository(Perfil)
+    private perfilRepository: Repository<Perfil>,
     private jwtService: JwtService,
   ) {}
 
-  async findOneByNameandPassword(data: CreateUserDto): Promise<User> {
+  async findOneByNameandPassword(data: Login): Promise<User> {
     const { usuario, password } = data;
 
     const user = await this.userRepository.findOne({
@@ -28,7 +31,7 @@ export class UserService {
     return user;
   }
 
-  async Login(data: CreateUserDto, res: Response) {
+  async Login(data: Login, res: Response) {
     const user = await this.findOneByNameandPassword(data);
 
     const payload = { id: user.id_usuario, usuario: user.usuario };
@@ -55,6 +58,23 @@ export class UserService {
       throw new NotFoundException(`Student not found`);
     }
     return student;
+  }
+
+  async create(data: CreateUserDto) {
+    const { id_perfil, ...rest } = data;
+
+    const perfil = await this.perfilRepository.findOne({
+      where: { id_perfil },
+    });
+
+    if (!perfil) {
+      throw new NotFoundException('Perfil not found');
+    }
+
+    const datauser = { ...rest, perfil };
+
+    const user = this.userRepository.create(datauser);
+    return this.userRepository.save(user);
   }
 }
 //IO

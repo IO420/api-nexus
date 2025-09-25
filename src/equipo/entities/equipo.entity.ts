@@ -1,0 +1,80 @@
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  JoinColumn,
+  Unique,
+  OneToMany,
+} from 'typeorm';
+
+@Entity({ name: 'plataforma' })
+export class Plataforma {
+  @PrimaryGeneratedColumn({ name: 'id_plataforma', type: 'int' })
+  id_plataforma: number;
+
+  @Column({ name: 'plataforma', type: 'varchar', length: 45 })
+  plataforma: string;
+
+  // Relación con equipos
+  @OneToMany(() => Equipo, (equipo) => equipo.plataforma)
+  equipos: Equipo[];
+}
+
+@Entity({ name: 'area_ubicacion' })
+export class AreaUbicacion {
+  @PrimaryGeneratedColumn({ name: 'id_area_ubicacion', type: 'int' })
+  id_area_ubicacion: number;
+
+  @Column({ name: 'area', type: 'varchar', length: 45 })
+  area: string;
+
+  @Column({ name: 'extra', type: 'char', length: 1, default: '0' })
+  extra: string;
+
+  // Relación con equipos
+  @OneToMany(() => Equipo, (equipo) => equipo.areaUbicacion)
+  equipos: Equipo[];
+}
+
+@Entity({ name: 'equipo' })
+@Unique('indice_unico_ubicacion', ['ubicacion'])
+export class Equipo {
+  @PrimaryGeneratedColumn({ name: 'id_equipo', type: 'int' })
+  id_equipo: number;
+
+  @Column({ name: 'id_plataforma', type: 'int' })
+  id_plataforma: number;
+
+  @Column({ name: 'id_area_ubicacion', type: 'int' })
+  id_area_ubicacion: number;
+
+  @Column({ name: 'nombre_equipo', type: 'varchar', length: 45 })
+  nombre_equipo: string;
+
+  @Column({ name: 'ubicacion', type: 'varchar', length: 25 })
+  ubicacion: string;
+
+  @Column({ name: 'activo', type: 'bit', default: () => "b'1'" })
+  activo: boolean;
+
+  @Column({
+    name: 'ip',
+    type: 'varchar',
+    length: 15,
+    default: () => "'no service'",
+  })
+  ip: string;
+
+  @ManyToOne(() => Plataforma, (plataforma) => plataforma.equipos, {
+    onUpdate: 'CASCADE',
+  })
+  @JoinColumn({ name: 'id_plataforma' })
+  plataforma: Plataforma;
+
+  @ManyToOne(() => AreaUbicacion, (area) => area.equipos, {
+    onUpdate: 'CASCADE',
+  })
+  @JoinColumn({ name: 'id_area_ubicacion' })
+  areaUbicacion: AreaUbicacion;
+}

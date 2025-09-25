@@ -24,6 +24,7 @@ import { MesaModule } from './mesa/mesa.module';
 import { Mesa } from './mesa/entities/mesa.entity';
 import { AlumnoInscritoModule } from './alumno_inscrito/alumno_inscrito.module';
 import { AlumnoInscrito, Plataforma } from './alumno_inscrito/entities/alumno_inscrito.entity';
+import { EquipoModule } from './equipo/equipo.module';
 
 @Module({
   imports: [
@@ -69,6 +70,7 @@ import { AlumnoInscrito, Plataforma } from './alumno_inscrito/entities/alumno_in
     ReciboModule,
     MesaModule,
     AlumnoInscritoModule,
+    EquipoModule,
   ],
   controllers: [AppController],
   providers: [AppService],

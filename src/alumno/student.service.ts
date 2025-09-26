@@ -1,8 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateStudentDto } from './dto/create-student.dto';
-import { Alumno, Carrera } from './entities/student.entity';
+import { Alumno } from './entities/student.entity';
 import { EntityManager, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Carrera } from 'src/carrera/entities/carrera.entity';
 
 @Injectable()
 export class AlumnoService {

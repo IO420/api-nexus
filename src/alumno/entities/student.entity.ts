@@ -1,4 +1,5 @@
 import { AlumnoSancion } from 'src/alumno_sancion/entities/alumno_sancion.entity';
+import { Carrera } from 'src/carrera/entities/carrera.entity';
 import { DetalleServicio } from 'src/detalle_servicio/entities/detalle_servicio.entity';
 import { Recibo } from 'src/recibo/entities/recibo.entity';
 import {
@@ -9,23 +10,6 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-
-@Entity({ name: 'carrera' })
-export class Carrera {
-  @PrimaryGeneratedColumn({ name: 'id_carrera', type: 'int', unsigned: true })
-  id_carrera: number;
-
-  @Column({
-    name: 'carrera',
-    type: 'varchar',
-    length: 100,
-    nullable: false,
-  })
-  carrera: string;
-
-  @OneToMany(() => Alumno, (student) => student.carrera)
-  estudiantes: Alumno[];
-}
 
 @Entity({ name: 'alumno' })
 export class Alumno {

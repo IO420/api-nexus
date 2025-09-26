@@ -9,7 +9,7 @@ import { Perfil, User } from './user/entities/user.entity';
 import { DetalleServicioModule } from './detalle_servicio/detalle_servicio.module';
 import { PeriodoModule } from './periodo/periodo.module';
 import { ServicioModule } from './servicio/servicio.module';
-import { Alumno, Carrera } from './alumno/entities/student.entity';
+import { Alumno } from './alumno/entities/student.entity';
 import { DetalleServicio } from './detalle_servicio/entities/detalle_servicio.entity';
 import { Periodo } from './periodo/entities/periodo.entity';
 import { Servicio } from './servicio/entities/servicio.entity';
@@ -23,8 +23,13 @@ import { ReciboModule } from './recibo/recibo.module';
 import { MesaModule } from './mesa/mesa.module';
 import { Mesa } from './mesa/entities/mesa.entity';
 import { AlumnoInscritoModule } from './alumno_inscrito/alumno_inscrito.module';
-import { AlumnoInscrito, Plataforma } from './alumno_inscrito/entities/alumno_inscrito.entity';
+import {
+  AlumnoInscrito,
+  Plataforma,
+} from './alumno_inscrito/entities/alumno_inscrito.entity';
 import { EquipoModule } from './equipo/equipo.module';
+import { CarreraModule } from './carrera/carrera.module';
+import { Carrera } from './carrera/entities/carrera.entity';
 
 @Module({
   imports: [
@@ -71,6 +76,7 @@ import { EquipoModule } from './equipo/equipo.module';
     MesaModule,
     AlumnoInscritoModule,
     EquipoModule,
+    CarreraModule,
   ],
   controllers: [AppController],
   providers: [AppService],

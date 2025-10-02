@@ -7,11 +7,6 @@ import { UpdateEquipoDto } from './dto/update-equipo.dto';
 export class EquipoController {
   constructor(private readonly equipoService: EquipoService) {}
 
-  @Post()
-  create(@Body() createEquipoDto: CreateEquipoDto) {
-    return this.equipoService.create(createEquipoDto);
-  }
-
   @Get()
   findAll() {
     return this.equipoService.findAll();
@@ -20,15 +15,5 @@ export class EquipoController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.equipoService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateEquipoDto: UpdateEquipoDto) {
-    return this.equipoService.update(+id, updateEquipoDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.equipoService.remove(+id);
   }
 }

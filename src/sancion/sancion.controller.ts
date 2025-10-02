@@ -4,6 +4,11 @@ import { SancionService } from './sancion.service';
 export class SancionController {
   constructor(private readonly sancionService: SancionService) {}
 
+  @Get()
+  find() {
+    return this.sancionService.find();
+  }
+
   @Get(':id')
   findOne(@Param('id') id: number) {
     return this.sancionService.findOne(+id);

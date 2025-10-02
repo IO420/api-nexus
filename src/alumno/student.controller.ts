@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { AlumnoService } from './student.service';
 import { CreateStudentDto } from './dto/create-student.dto';
 import { Alumno } from './entities/student.entity';
+import { JwtAuthGuard } from 'src/user/jwt.guard';
 
 @Controller('student')
 export class AlumnoController {

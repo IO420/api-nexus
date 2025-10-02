@@ -1,7 +1,6 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { AlumnoInscritoService } from './alumno_inscrito.service';
 import { CreateAlumnoInscritoDto } from './dto/create-alumno_inscrito.dto';
-import { UpdateAlumnoInscritoDto } from './dto/update-alumno_inscrito.dto';
 import { AlumnoInscrito } from './entities/alumno_inscrito.entity';
 
 @Controller('alumno-inscrito')

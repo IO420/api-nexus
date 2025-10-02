@@ -1,6 +1,5 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateAlumnoInscritoDto } from './dto/create-alumno_inscrito.dto';
-import { UpdateAlumnoInscritoDto } from './dto/update-alumno_inscrito.dto';
 import { AlumnoInscrito } from './entities/alumno_inscrito.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';

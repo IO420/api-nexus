@@ -1,26 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { CreateEquipoDto } from './dto/create-equipo.dto';
-import { UpdateEquipoDto } from './dto/update-equipo.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Equipo } from './entities/equipo.entity';
 
 @Injectable()
 export class EquipoService {
-  create(createEquipoDto: CreateEquipoDto) {
-    return 'This action adds a new equipo';
-  }
+  constructor(@InjectRepository(Equipo)
+private readonly equipoRepository: Repository<Equipo>){}
 
   findAll() {
-    return `This action returns all equipo`;
+    return this.equipoRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} equipo`;
-  }
-
-  update(id: number, updateEquipoDto: UpdateEquipoDto) {
-    return `This action updates a #${id} equipo`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} equipo`;
+  findOne(id_equipo: number) {
+    return this.equipoRepository.findOne({where:{id_equipo}});
   }
 }

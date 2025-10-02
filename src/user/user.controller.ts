@@ -11,7 +11,6 @@ import {
 import type { Response } from 'express';
 import { UserService } from './user.service';
 import { changePasswordDto, CreateUserDto, Login } from './dto/create-user.dto';
-import { AuthGuard } from '@nestjs/passport';
 import { JwtAuthGuard } from './jwt.guard';
 
 @Controller('user')
@@ -23,7 +22,7 @@ export class UserController {
     return this.userService.Login(data, res);
   }
 
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(JwtAuthGuard)
   @Get('/validate-token')
   getProfile(@Req() req) {
     return req.user;
@@ -35,7 +34,7 @@ export class UserController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Post('/change-password')
+  @Post('/changePassword')
   async changePassword(@Body() data: changePasswordDto, @Req() req) {
     const id_usuario = req.user.id;
     await this.userService.changePassword(data, id_usuario);

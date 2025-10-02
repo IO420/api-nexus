@@ -10,11 +10,10 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
 
   app.enableCors(
-    {
-    origin: configService.get<string>('Front_URL'),
-  }
+  //   {
+  //   origin: configService.get<string>('Front_URL'),
+  // }
 );
-  
   await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();

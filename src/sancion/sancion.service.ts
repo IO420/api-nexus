@@ -10,6 +10,10 @@ export class SancionService {
     private readonly sancionRepository: Repository<Sancion>,
   ) {}
 
+  async find(){
+    return this.sancionRepository.find()
+  }
+
   async findOne(id_sancion: number): Promise<Sancion> {
     const sancion = await this.sancionRepository.findOne({
       where: { id_sancion },

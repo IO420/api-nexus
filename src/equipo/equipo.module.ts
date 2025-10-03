@@ -10,3 +10,4 @@ import { Equipo } from './entities/equipo.entity';
   providers: [EquipoService],
 })
 export class EquipoModule {}
+//IO

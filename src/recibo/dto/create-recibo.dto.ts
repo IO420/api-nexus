@@ -1,5 +1,5 @@
 import { Type } from 'class-transformer';
-import { IsDate, IsNumber, IsString } from 'class-validator';
+import { IsDate, IsDateString, IsNumber, IsString } from 'class-validator';
 
 export class CreateReciboDto {
 
@@ -12,4 +12,12 @@ export class CreateReciboDto {
   @IsDate()
   @Type(() => Date)
   fecha_recibo: Date;
+}
+
+export class FindReciboByRangeDto {
+  @IsDateString()
+  desde: string;
+
+  @IsDateString()
+  hasta: string;
 }

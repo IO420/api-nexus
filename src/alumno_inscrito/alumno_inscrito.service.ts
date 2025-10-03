@@ -37,7 +37,7 @@ export class AlumnoInscritoService {
 
   async findByAlumno(id_cuenta: number): Promise<AlumnoInscrito[]> {
     return this.alumnoInscritoRepo.find({
-      where: { alumno: { id_cuenta } },
+      where: { alumno: { id_cuenta }, periodo:{id_periodo:24}},
       relations: ['alumno', 'periodo', 'plataforma'],
     });
   }

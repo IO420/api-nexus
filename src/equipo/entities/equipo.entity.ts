@@ -1,3 +1,5 @@
+import { AreaUbicacion } from 'src/area_ubicacion/entities/area_ubicacion.entity';
+import { ProgramaEquipo } from 'src/programa_equipo/entities/programa_equipo.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -18,22 +20,6 @@ export class Plataforma {
 
   // Relación con equipos
   @OneToMany(() => Equipo, (equipo) => equipo.plataforma)
-  equipos: Equipo[];
-}
-
-@Entity({ name: 'area_ubicacion' })
-export class AreaUbicacion {
-  @PrimaryGeneratedColumn({ name: 'id_area_ubicacion', type: 'int' })
-  id_area_ubicacion: number;
-
-  @Column({ name: 'area', type: 'varchar', length: 45 })
-  area: string;
-
-  @Column({ name: 'extra', type: 'char', length: 1, default: '0' })
-  extra: string;
-
-  // Relación con equipos
-  @OneToMany(() => Equipo, (equipo) => equipo.areaUbicacion)
   equipos: Equipo[];
 }
 
@@ -77,4 +63,7 @@ export class Equipo {
   })
   @JoinColumn({ name: 'id_area_ubicacion' })
   areaUbicacion: AreaUbicacion;
+
+  @OneToMany(() => ProgramaEquipo, (programaEquipo) => programaEquipo.equipo)
+  programaEquipos: ProgramaEquipo[];
 }

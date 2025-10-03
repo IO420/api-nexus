@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { CreateEquipoDto } from './dto/create-equipo.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Equipo } from './entities/equipo.entity';
@@ -17,3 +16,4 @@ private readonly equipoRepository: Repository<Equipo>){}
     return this.equipoRepository.findOne({where:{id_equipo}});
   }
 }
+//IO

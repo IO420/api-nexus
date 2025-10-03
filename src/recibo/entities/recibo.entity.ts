@@ -29,13 +29,13 @@ export class Recibo {
   monto: number;
 
   @Column({ name: 'fecha_recibo', type: 'date', nullable: false })
-  fecha_recibo: Date ;
+  fecha_recibo: Date;
 
-  @ManyToOne(() => Alumno, (alum) => alum.id_cuenta, {})
+  @ManyToOne(() => Alumno, (alum) => alum.id_cuenta, { eager: true })
   @JoinColumn({ name: 'id_cuenta' })
   alum: Alumno;
 
-  @ManyToOne(() => User, (user) => user.id_usuario, {})
+  @ManyToOne(() => User, (user) => user.id_usuario, { eager: true })
   @JoinColumn({ name: 'id_usuario' })
   user: User;
 }

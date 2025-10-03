@@ -1,7 +1,7 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Recibo } from './entities/recibo.entity';
-import { EntityManager, Repository } from 'typeorm';
+import { Between, EntityManager, Repository } from 'typeorm';
 import { CreateReciboDto } from './dto/create-recibo.dto';
 
 @Injectable()
@@ -22,6 +22,18 @@ export class ReciboService {
     const repo = manager.getRepository(Recibo);
     const details = repo.create(data);
     return await repo.save(details);
+  }
+
+  async findByDateRange(desde: string, hasta: string) {
+    // Convertimos strings a objetos Date
+    const fechaDesde = new Date(desde);
+    const fechaHasta = new Date(hasta);
+
+    return await this.reciboRepository.find({
+      where: {
+        fecha_recibo: Between(fechaDesde, fechaHasta),
+      },
+    });
   }
 }
 //IO

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { AlumnoSancionService } from './alumno_sancion.service';
 import { CreateAlumnoSancionDto } from './dto/create-alumno_sancion.dto';
 
@@ -11,14 +11,14 @@ export class AlumnoSancionController {
     return this.alumnoSancionService.create(createAlumnoSancionDto);
   }
 
-  @Get()
-  findAll() {
-    return this.alumnoSancionService.findAll();
+  @Get(':id')
+  findbyStudent(@Param('id') id: number) {
+    return this.alumnoSancionService.findbyStudent(+id);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: number) {
-    return this.alumnoSancionService.findOne(+id);
+  @Delete()
+  deleteSancion(){
+
   }
 }
 //IO

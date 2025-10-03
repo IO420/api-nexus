@@ -36,16 +36,25 @@ export class AlumnoSancionService {
     return await this.alumnosancionRepository.save(alumnosancion);
   }
 
-  findAll() {
-    return `This action returns all alumnoSancion`;
-  }
-
-  async findOne(id_cuenta: number): Promise<AlumnoSancion> {
-    const alusancion = await this.alumnosancionRepository.findOne({
+  async findbyStudent(id_cuenta: number): Promise<AlumnoSancion[]> {
+    const alusancion = await this.alumnosancionRepository.find({
       where: { alumno: { id_cuenta } },
+      select:{
+        id_alumno_sancion:true,
+        fecha_inicio:true,
+        alumno:{
+          id_cuenta:true,
+          nombre:true
+        },
+        sancion:{
+          id_sancion:true,
+          sancion:true,
+          duracion:true
+        }
+      }
     });
     if (!alusancion) {
-      throw new NotFoundException(`Student with ID ${id_cuenta} not found`);
+      throw new NotFoundException(`student without sancion`);
     }
     return alusancion;
   }

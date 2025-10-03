@@ -1,7 +1,5 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { EquipoService } from './equipo.service';
-import { CreateEquipoDto } from './dto/create-equipo.dto';
-import { UpdateEquipoDto } from './dto/update-equipo.dto';
 
 @Controller('equipo')
 export class EquipoController {
@@ -13,7 +11,8 @@ export class EquipoController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: number) {
     return this.equipoService.findOne(+id);
   }
 }
+//IO

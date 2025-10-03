@@ -30,6 +30,12 @@ import {
 import { EquipoModule } from './equipo/equipo.module';
 import { CarreraModule } from './carrera/carrera.module';
 import { Carrera } from './carrera/entities/carrera.entity';
+import { Equipo } from './equipo/entities/equipo.entity';
+import { AreaUbicacionModule } from './area_ubicacion/area_ubicacion.module';
+import { ProgramaModule } from './programa/programa.module';
+import { AreaUbicacion } from './area_ubicacion/entities/area_ubicacion.entity';
+import { Programa } from './programa/entities/programa.entity';
+import { ProgramaEquipoModule } from './programa_equipo/programa_equipo.module';
 
 @Module({
   imports: [
@@ -60,6 +66,9 @@ import { Carrera } from './carrera/entities/carrera.entity';
           Mesa,
           AlumnoInscrito,
           Plataforma,
+          Equipo,
+          AreaUbicacion,
+          Programa,
         ],
         synchronize: false, //Never change to true in production!
       }),
@@ -77,6 +86,9 @@ import { Carrera } from './carrera/entities/carrera.entity';
     AlumnoInscritoModule,
     EquipoModule,
     CarreraModule,
+    AreaUbicacionModule,
+    ProgramaModule,
+    ProgramaEquipoModule,
   ],
   controllers: [AppController],
   providers: [AppService],

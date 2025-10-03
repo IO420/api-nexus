@@ -1,6 +1,7 @@
 import {
   BadRequestException,
   Injectable,
+  InternalServerErrorException,
   Req,
   UseGuards,
 } from '@nestjs/common';
@@ -38,7 +39,7 @@ export class OperationsService {
       }
 
       const user = await this.userService.findOne(id_usuario);
-      const alum = await this.alumnoService.findOne(id_cuenta)
+      const alum = await this.alumnoService.findOne(id_cuenta);
 
       const detalleData = {
         servicio: 1,
@@ -63,7 +64,7 @@ export class OperationsService {
       return { message: 'correct' };
     } catch (error) {
       await queryRunner.rollbackTransaction();
-      return { message: 'error', error: error.message };
+      throw new InternalServerErrorException(error.message);
     } finally {
       await queryRunner.release();
     }
@@ -71,6 +72,12 @@ export class OperationsService {
 
   async addCredit(data, id_usuario: number) {
     const { id_cuenta, monto, fecha_recibo, folio_recibo } = data;
+
+    const ticket = await this.reciboService.findOne(folio_recibo);
+
+    if (ticket) {
+      throw new BadRequestException('Ticket ya existente');
+    }
 
     const queryRunner = this.dataSource.createQueryRunner();
     await queryRunner.connect();
@@ -96,7 +103,7 @@ export class OperationsService {
       return { message: 'correct' };
     } catch (error) {
       await queryRunner.rollbackTransaction();
-      return { message: 'error', error: error.message };
+      throw new InternalServerErrorException(error.message);
     } finally {
       await queryRunner.release();
     }

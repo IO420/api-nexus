@@ -1,3 +1,4 @@
+import { Plataforma } from 'src/alumno_inscrito/entities/alumno_inscrito.entity';
 import { AreaUbicacion } from 'src/area_ubicacion/entities/area_ubicacion.entity';
 import { ProgramaEquipo } from 'src/programa_equipo/entities/programa_equipo.entity';
 import {
@@ -9,19 +10,6 @@ import {
   Unique,
   OneToMany,
 } from 'typeorm';
-
-@Entity({ name: 'plataforma' })
-export class Plataforma {
-  @PrimaryGeneratedColumn({ name: 'id_plataforma', type: 'int' })
-  id_plataforma: number;
-
-  @Column({ name: 'plataforma', type: 'varchar', length: 45 })
-  plataforma: string;
-
-  // Relación con equipos
-  @OneToMany(() => Equipo, (equipo) => equipo.plataforma)
-  equipos: Equipo[];
-}
 
 @Entity({ name: 'equipo' })
 @Unique('indice_unico_ubicacion', ['ubicacion'])

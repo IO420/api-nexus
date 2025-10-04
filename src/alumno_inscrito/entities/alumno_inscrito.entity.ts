@@ -1,6 +1,14 @@
 import { Alumno } from 'src/alumno/entities/student.entity';
+import { Equipo } from 'src/equipo/entities/equipo.entity';
 import { Periodo } from 'src/periodo/entities/periodo.entity';
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  JoinColumn,
+  OneToMany,
+} from 'typeorm';
 
 @Entity({ name: 'plataforma' })
 export class Plataforma {
@@ -10,8 +18,14 @@ export class Plataforma {
   @Column({ name: 'plataforma', type: 'varchar', length: 45 })
   nombre: string;
 
-  @OneToMany(() => AlumnoInscrito, (alumnoInscrito) => alumnoInscrito.plataforma)
+  @OneToMany(
+    () => AlumnoInscrito,
+    (alumnoInscrito) => alumnoInscrito.plataforma,
+  )
   alumnos_inscritos: AlumnoInscrito[];
+
+  @OneToMany(() => Equipo, (equipo) => equipo.plataforma)
+  equipos: Equipo[];
 }
 
 @Entity({ name: 'alumno_inscrito' })
@@ -19,7 +33,11 @@ export class AlumnoInscrito {
   @PrimaryGeneratedColumn({ name: 'id_alumno_inscrito' })
   id_alumno_inscrito: number;
 
-  @Column({ name: 'fecha_inscripcion', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  @Column({
+    name: 'fecha_inscripcion',
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP',
+  })
   fecha_inscripcion: Date;
 
   @Column({ name: 'tiempo_disponible', type: 'int', default: 3600 })
@@ -43,6 +61,12 @@ export class AlumnoInscrito {
   @JoinColumn({ name: 'id_plataforma' })
   plataforma: Plataforma;
 
-  @Column({ name: 'ad', type: 'bit', width: 1, nullable: true, default: () => "b'0'" })
+  @Column({
+    name: 'ad',
+    type: 'bit',
+    width: 1,
+    nullable: true,
+    default: () => "b'0'",
+  })
   ad?: boolean;
 }

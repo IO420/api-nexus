@@ -36,6 +36,7 @@ import { ProgramaModule } from './programa/programa.module';
 import { AreaUbicacion } from './area_ubicacion/entities/area_ubicacion.entity';
 import { Programa } from './programa/entities/programa.entity';
 import { ProgramaEquipoModule } from './programa_equipo/programa_equipo.module';
+import { ProgramaEquipo } from './programa_equipo/entities/programa_equipo.entity';
 
 @Module({
   imports: [
@@ -69,6 +70,7 @@ import { ProgramaEquipoModule } from './programa_equipo/programa_equipo.module';
           Equipo,
           AreaUbicacion,
           Programa,
+          ProgramaEquipo,
         ],
         synchronize: false, //Never change to true in production!
       }),

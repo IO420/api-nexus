@@ -41,6 +41,18 @@ export class AlumnoService {
     return student;
   }
 
+  async findOneByName(nombre: string): Promise<Alumno> {
+    const student = await this.studentRepository.findOne({
+      where: { nombre },
+    });
+
+    if (!student) {
+      throw new NotFoundException(`Student not found`);
+    }
+
+    return student;
+  }
+
   async GetCredit(id_cuenta: number): Promise<Alumno['credito']> {
     const student = await this.findOne(id_cuenta);
     return student.credito;

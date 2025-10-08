@@ -12,8 +12,8 @@ export class ProgramaEquipoService {
     private readonly ProgramaEquipoRepository: Repository<ProgramaEquipo>,
   ) {}
 
-  findAll() {
-    return `This action returns all programaEquipo`;
+  findAllProgramByNumber(id_equipo: number) {
+    return this.ProgramaEquipoRepository.find({ where: { id_equipo } });
   }
 
   async findOne(id_equipo: number) {
@@ -24,7 +24,7 @@ export class ProgramaEquipoService {
     if (equipo.length === 0) {
       throw new NotFoundException(`machine without programs`);
     }
-    
+
     return equipo;
   }
 

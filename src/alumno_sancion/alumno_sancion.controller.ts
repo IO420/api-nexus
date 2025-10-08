@@ -16,9 +16,9 @@ export class AlumnoSancionController {
     return this.alumnoSancionService.findbyStudent(+id);
   }
 
-  @Delete()
-  deleteSancion(){
-
+  @Delete(':id_cuenta')
+  async deleteSancionesAlumno(@Param('id_cuenta') id_cuenta: number) {
+    return this.alumnoSancionService.removeByStudent(+id_cuenta);
   }
 }
 //IO

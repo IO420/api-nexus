@@ -9,6 +9,7 @@ export class AreaUbicacionService {
     @InjectRepository(AreaUbicacion)
     private readonly areaUbicacionRepository: Repository<AreaUbicacion>,
   ) {}
+
   findAll() {
     return this.areaUbicacionRepository.find();
   }
@@ -18,11 +19,11 @@ export class AreaUbicacionService {
       where: { id_area_ubicacion },
     });
 
-    if(!area){
-      return "this area dosnt exist"
+    if (!area) {
+      return 'this area dosnt exist';
     }
 
-    return area
+    return area;
   }
 }
 //IO

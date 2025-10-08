@@ -1,24 +1,25 @@
-import { Equipo } from "src/equipo/entities/equipo.entity";
-import { Programa } from "src/programa/entities/programa.entity";
-import { Entity, PrimaryColumn, ManyToOne, JoinColumn } from "typeorm";
+import { Equipo } from 'src/equipo/entities/equipo.entity';
+import { Programa } from 'src/programa/entities/programa.entity';
+import { Entity, PrimaryColumn, ManyToOne, JoinColumn } from 'typeorm';
 
-@Entity("programa_equipo")
+@Entity('programa_equipo')
 export class ProgramaEquipo {
-  @PrimaryColumn({ name: "id_programa", type: "int" })
+  @PrimaryColumn({ name: 'id_programa', type: 'int' })
   id_programa: number;
 
-  @PrimaryColumn({ name: "id_equipo", type: "int" })
+  @PrimaryColumn({ name: 'id_equipo', type: 'int' })
   id_equipo: number;
 
   @ManyToOne(() => Programa, (programa) => programa.programaEquipos, {
-    onUpdate: "CASCADE",
+    eager: true,
+    onUpdate: 'CASCADE',
   })
-  @JoinColumn({ name: "id_programa" })
+  @JoinColumn({ name: 'id_programa' })
   programa: Programa;
 
   @ManyToOne(() => Equipo, (equipo) => equipo.programaEquipos, {
-    onUpdate: "CASCADE",
+    onUpdate: 'CASCADE',
   })
-  @JoinColumn({ name: "id_equipo" })
+  @JoinColumn({ name: 'id_equipo' })
   equipo: Equipo;
 }

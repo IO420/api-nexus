@@ -22,7 +22,6 @@ export class AlumnoSancion {
   fecha_inicio: Date;
 
   @ManyToOne(() => Alumno, (student) => student.sanciones, {
-    eager: true,
     nullable: false,
   })
   @JoinColumn({ name: 'id_cuenta' })

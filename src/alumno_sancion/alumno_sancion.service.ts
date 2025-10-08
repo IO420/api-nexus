@@ -15,9 +15,7 @@ export class AlumnoSancionService {
     private readonly sancionService: SancionService,
   ) {}
 
-  async create(
-    createAlumnoSancionDto: CreateAlumnoSancionDto,
-  ) {
+  async create(createAlumnoSancionDto: CreateAlumnoSancionDto) {
     const { id_sancion, id_cuenta } = createAlumnoSancionDto;
 
     const alumno = await this.alumnoService.findOne(id_cuenta);
@@ -39,24 +37,30 @@ export class AlumnoSancionService {
   async findbyStudent(id_cuenta: number): Promise<AlumnoSancion[]> {
     const alusancion = await this.alumnosancionRepository.find({
       where: { alumno: { id_cuenta } },
-      select:{
-        id_alumno_sancion:true,
-        fecha_inicio:true,
-        alumno:{
-          id_cuenta:true,
-          nombre:true
-        },
-        sancion:{
-          id_sancion:true,
-          sancion:true,
-          duracion:true
-        }
-      }
     });
-    if (!alusancion) {
+
+    if (alusancion.length === 0) {
       throw new NotFoundException(`student without sancion`);
     }
     return alusancion;
+  }
+
+  async removeByStudent(id_cuenta: number): Promise<{ message: string }> {
+    const sanciones = await this.alumnosancionRepository.find({
+      where: { alumno: { id_cuenta } },
+    });
+
+    if (!sanciones || sanciones.length === 0) {
+      throw new NotFoundException(
+        `El alumno con id ${id_cuenta} no tiene sanciones`,
+      );
+    }
+
+    await this.alumnosancionRepository.delete({ alumno: { id_cuenta } });
+
+    return {
+      message: `Todas las sanciones del alumno ${id_cuenta} han sido eliminadas`,
+    };
   }
 }
 //IO

@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { Response } from 'express';
 import { changePasswordDto, CreateUserDto, Login } from './dto/create-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -51,17 +55,30 @@ export class UserService {
   }
 
   async findOne(id_usuario: number): Promise<User> {
-    const student = await this.userRepository.findOne({
+    const user = await this.userRepository.findOne({
       where: { id_usuario },
     });
-    if (!student) {
+    if (!user) {
       throw new NotFoundException(`Student not found`);
     }
-    return student;
+    return user;
+  }
+
+  async findbyUser(usuario: string) {
+    const user = await this.userRepository.findOne({
+      where: { usuario },
+    });
+    return user;
   }
 
   async create(data: CreateUserDto) {
     const { id_perfil, ...rest } = data;
+
+    const user = await this.findbyUser(data.usuario);
+
+    if (user) {
+      throw new BadRequestException('User found, change the user ');
+    }
 
     const perfil = await this.perfilRepository.findOne({
       where: { id_perfil },
@@ -73,8 +90,8 @@ export class UserService {
 
     const datauser = { ...rest, perfil };
 
-    const user = this.userRepository.create(datauser);
-    return this.userRepository.save(user);
+    const usercreate = this.userRepository.create(datauser);
+    return this.userRepository.save(usercreate);
   }
 
   async changePassword(data: changePasswordDto, id_usuario: number) {

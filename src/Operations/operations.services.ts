@@ -2,17 +2,13 @@ import {
   BadRequestException,
   Injectable,
   InternalServerErrorException,
-  Req,
-  UseGuards,
 } from '@nestjs/common';
 import { AlumnoService } from 'src/alumno/student.service';
 import { DetalleServicioService } from 'src/detalle_servicio/detalle_servicio.service';
 import { DataSource } from 'typeorm';
 import { chargePrintDto } from './dto/operations.dto';
-import { CreateDetalleServicioDto } from 'src/detalle_servicio/dto/create-detalle_servicio.dto';
 import { UserService } from 'src/user/user.service';
 import { ReciboService } from 'src/recibo/recibo.service';
-import { CreateReciboDto } from 'src/recibo/dto/create-recibo.dto';
 
 @Injectable()
 export class OperationsService {

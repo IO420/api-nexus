@@ -34,7 +34,9 @@ export class AlumnoSancionService {
     return await this.alumnosancionRepository.save(alumnosancion);
   }
 
-  async findbyStudent(id_cuenta: number): Promise<AlumnoSancion[]> {
+  async findbyStudent(id_cuenta: number) {
+    const student = await this.alumnoService.findOne(id_cuenta);
+
     const alusancion = await this.alumnosancionRepository.find({
       where: { alumno: { id_cuenta } },
     });
@@ -42,7 +44,7 @@ export class AlumnoSancionService {
     if (alusancion.length === 0) {
       throw new NotFoundException(`student without sancion`);
     }
-    return alusancion;
+    return { student, alusancion };
   }
 
   async removeByStudent(id_cuenta: number): Promise<{ message: string }> {

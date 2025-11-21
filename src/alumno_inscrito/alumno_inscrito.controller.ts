@@ -18,7 +18,7 @@ export class AlumnoInscritoController {
   }
 
   @Get(':id_cuenta')
-  async findByAlumno(@Param('id_cuenta') id_cuenta: number): Promise<AlumnoInscrito[]> {
-    return this.alumnoInscritoService.findByAlumno(id_cuenta);
+  async findById(@Param('id_cuenta') id_cuenta: number): Promise<AlumnoInscrito> {
+    return this.alumnoInscritoService.findById(id_cuenta);
   }
 }

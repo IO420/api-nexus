@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateAlumnoInscritoDto } from './dto/create-alumno_inscrito.dto';
 import { AlumnoInscrito } from './entities/alumno_inscrito.entity';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -35,10 +35,15 @@ export class AlumnoInscritoService {
     });
   }
 
-  async findByAlumno(id_cuenta: number): Promise<AlumnoInscrito[]> {
-    return this.alumnoInscritoRepo.find({
+  async findById(id_cuenta: number): Promise<AlumnoInscrito> {
+
+    const student = await this.alumnoInscritoRepo.findOne({
       where: { alumno: { id_cuenta }, periodo: { id_periodo: 27 } },
       relations: ['alumno', 'periodo', 'plataforma'],
     });
+
+    if(!student) throw new NotFoundException("unregistered student")
+
+    return student;
   }
 }

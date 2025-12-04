@@ -5,8 +5,9 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 import { ConfigService } from '@nestjs/config';
 
 export interface JwtPayload {
-  id: string;
+  id: number;
   usuario: string;
+  role:string;
 }
 
 @Injectable()
@@ -23,6 +24,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     if (!payload || !payload.id || !payload.usuario) {
       throw new ForbiddenException('Token inválido o corrupto');
     }
-    return { id: payload.id, usuario: payload.usuario };
+    return { id: payload.id, usuario: payload.usuario,role:payload.role};
   }
 }

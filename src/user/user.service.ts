@@ -38,7 +38,7 @@ export class UserService {
   async Login(data: Login, res: Response) {
     const user = await this.findOneByNameandPassword(data);
 
-    const payload = { id: user.id_usuario, usuario: user.usuario };
+    const payload = { id: user.id_usuario, usuario: user.usuario, role:user.perfil.perfil};
     const token = await this.jwtService.signAsync(payload);
 
     res.cookie('token', token, {

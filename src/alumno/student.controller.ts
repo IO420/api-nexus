@@ -1,8 +1,11 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, UseGuards } from '@nestjs/common';
 import { AlumnoService } from './student.service';
 import { CreateStudentDto } from './dto/create-student.dto';
 import { Alumno } from './entities/student.entity';
 import { JwtAuthGuard } from 'src/user/jwt.guard';
+import { RolesGuard } from 'src/roles.guard';
+import { Roles } from 'src/roles.decorator';
+import { Role } from 'src/role.enum';
 
 @Controller('student')
 export class AlumnoController {
@@ -13,6 +16,7 @@ export class AlumnoController {
     return this.alumnoService.create(createStudentDto);
   }
 
+  //@UseGuards(JwtAuthGuard)
   @Get(':id')
   findOne(@Param('id') id: number) {
     return this.alumnoService.findOne(+id);
